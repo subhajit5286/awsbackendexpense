@@ -3,7 +3,7 @@
 async function showListofFiles() {
 try{
     const token = localStorage.getItem('token');
-    const response = await axios.get('http://54.227.2.199:4000/expense/downloadedFiles', { headers: {"Authorization" : token} })
+    const response = await axios.get('http://54.175.203.55:4000/expense/downloadedFiles', { headers: {"Authorization" : token} })
        console.log('clicked1')
       const data = response.data;
     console.log('all downloads',data);

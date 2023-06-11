@@ -2,9 +2,9 @@ const path = require('path');
 
 const express = require('express');
 const bodyParser = require('body-parser');   
-const helmet = require('helmet');
+//const helmet = require('helmet');
 const compression = require('compression');
-const morgan = require('morgan');
+//const morgan = require('morgan');
 const fs = require('fs');
 
 //const errorController = require('./controllers/error');
@@ -19,10 +19,10 @@ const app = express();
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a'});
 
 app.use(cors());
-app.use(helmet()); 
-app.use(compression()); 
-app.use(compression()); 
-app.use(morgan('combined', { stream: accessLogStream }));
+//app.use(helmet()); 
+// app.use(compression()); 
+// app.use(compression()); 
+// app.use(morgan('combined', { stream: accessLogStream }));
 
 const Expense = require('./models/expense');
 const User = require('./models/user');
@@ -38,14 +38,17 @@ const forgotPasswordRoutes = require('./routes/forgotPassword');
 
 
 app.use(bodyParser.json({ extended: false }));
-app.use(express.static(path.join(__dirname, 'public')));  
+//app.use(express.static(path.join(__dirname, 'public')));  
+
 
 app.use('/user', userRoutes);
 app.use('/expense', expenseRoutes);
 app.use('/purchase',purchaseRoutes);
 app.use('/premium',leaderboardRoutes);
 app.use('/password',forgotPasswordRoutes);
-
+app.use(function(req,res){
+  res.sendFile(path.join(__dirname,`/${req.url}`));
+})
 
 //app.use(errorController.get404);;
 User.hasMany(Expense);

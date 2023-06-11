@@ -11,7 +11,7 @@ form.addEventListener('submit', forgotPassword);//
             
         }
         console.log(emailDetails)
-         let response = await axios.post("http://54.227.2.199:4000/password/forgotpassword",emailDetails)
+         let response = await axios.post("http://54.175.203.55:4000/password/forgotpassword",emailDetails)
         // .then(response=>{
         //   console.log(response.status)
         //   window.location.href = "./login.html"

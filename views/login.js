@@ -14,7 +14,7 @@ form.addEventListener('submit', loginUser);//
 
         }
         console.log(loginDetails)
-         let response = await axios.post("http://54.227.2.199:4000/user/login",loginDetails)
+         let response = await axios.post("http://54.175.203.55:4000/user/login",loginDetails)
         // .then(response=>{
         //   console.log(response.status)
         //   window.location.href = "./login.html"

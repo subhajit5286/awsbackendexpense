@@ -9,7 +9,7 @@ form.addEventListener('submit', saveExpense);//
 async function download(){
 try{
 const token = localStorage.getItem('token');
-const response = await axios.get('http://54.227.2.199:4000/expense/download', { headers: {"Authorization" : token} })
+const response = await axios.get('http://54.175.203.55:4000/expense/download', { headers: {"Authorization" : token} })
 console.log('clicked')
 if(response.status === 200){
         // document.getElementById('fileDownloadedbutton').hidden = false;
@@ -62,7 +62,7 @@ function saveExpense(event){
 
     }
     const token = localStorage.getItem('token');
-    axios.post("http://54.227.2.199:4000/expense/add-expense",obj, {headers: {"Authorization": token}})
+    axios.post("http://54.175.203.55:4000/expense/add-expense",obj, {headers: {"Authorization": token}})
        .then((response) => {
         showNewExpenseOnScreen(response.data.newExpense);
            console.log(response);
@@ -117,7 +117,7 @@ async function getAllExpenses(page = 1, limit = 2) {
     if(localStorage.getItem('limit')){
         limit = localStorage.getItem('limit');
     }
-    const res = await axios.get(`http://54.227.2.199:4000/expense/get-expenses?page=${page}&limit=${limit}`, {headers: {'Authorization': token}})
+    const res = await axios.get(`http://54.175.203.55:4000/expense/get-expenses?page=${page}&limit=${limit}`, {headers: {'Authorization': token}})
         const expenses = res.data.allExpensesDetails;
         document.getElementById("items").innerHTML=''
         expenses.forEach((expense) => {
@@ -223,7 +223,7 @@ function showNewExpenseOnScreen(expense) {
 function deleteExpense(expenseid) {
     console.log(expenseid);
     const token = localStorage.getItem('token');
-    axios.delete(`http://54.227.2.199:4000/expense/delete-expense/${expenseid}`,{headers:{"Authorization":token}})
+    axios.delete(`http://54.175.203.55:4000/expense/delete-expense/${expenseid}`,{headers:{"Authorization":token}})
         .then((response) => {
            removeExpenseFromScreen(expenseid);
         })
@@ -242,14 +242,14 @@ function removeExpenseFromScreen(expenseid) {
 document.getElementById('buy premium').onclick = async function (e) {
     try{
         const token = localStorage.getItem('token')
-    const response = await axios.get('http://54.227.2.199/:4000/purchase/premiummembership',{ headers: {"Authorization": token}});
+    const response = await axios.get('http://54.175.203.55/:4000/purchase/premiummembership',{ headers: {"Authorization": token}});
     console.log(response);
     var options = 
     {
         "key" : response.data.key_id,
         "order_id" : response.data.order.id,
          "handler": async function (response) {
-             await axios.post('http://54.227.2.199:4000/purchase/updatetransactionstatus',{
+             await axios.post('http://54.175.203.55:4000/purchase/updatetransactionstatus',{
                  order_id: options.order_id,
                  payment_id: response.razorpay_payment_id,
 
@@ -280,7 +280,7 @@ async function showLeaderboard(){
     try{
     const token = localStorage.getItem('token');
     console.log(token)
-    const userLeaderBoardArray = await axios.get("http://54.227.2.199:4000/premium/showLeaderBoard",{headers:{"Authorization":token}} )
+    const userLeaderBoardArray = await axios.get("http://54.175.203.55:4000/premium/showLeaderBoard",{headers:{"Authorization":token}} )
          console.log(userLeaderBoardArray);
          const parentNode = document.getElementById("items1");
          parentNode.innerHTML =""
